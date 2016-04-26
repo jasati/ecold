@@ -1,0 +1,101 @@
+<div class="modal-header">
+    <div class="col-md-12" >
+    	<div class="col-md-8">
+    		<h3 class="modal-title">{{vm.title}} - {{vm.dataAtual | date:"dd/MM/yyyy"}}</h3>
+    	</div>
+    	<div class="input-group col-md-4 col-md-offset-2">
+    		<span class="input-group-addon">
+    			<input type="checkbox" ng-model="vm.reloadPedido">
+    		</span>
+			<button class="btn btn-warning" type="button" ng-click="vm.selecionarPedido()">
+			  Pedidos <span class="badge">{{vm.qtPedido}}</span>
+			</button>    		
+    	</div>
+    </div>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-12" ng-class="">
+			<div id="col1" class="col-md-5">
+
+				<div id="localizaItem" class="form-group">
+					 <input id="inp-item" type="text" class="form-control input-lg" tooltip-placement="top" tooltip="Pressione [ENTER] no teclado, para exibir os itens ou digite a descrição do item e precione [ENTER] para confirmar" placeholder="Informe o item e precione [ENTER]" ng-model="vm.itemSearch" autofocus="{{vm.focus}}" ng-keypress="vm.abrirVenda($event)"/>
+				</div>
+				<div id="lb-venda-total">
+					<h2 ng-show="vm.movest.status==1">Total: <span class="text-danger">{{vm.movest.total | currency:'R$'}}</span></h2>
+				</div>
+				<div id="btFimMov">
+					<button class="btn btn-success" type="button" ng-click="vm.fecharVenda()" tooltip-placement="top" tooltip="Fecha uma venda aberta. Tecla de Atalho - [Alt + F] " accesskey="F"ng-show="vm.movest.status==1" >Fechar Venda</button>
+					<button class="btn btn-warning" type="button" ng-click="vm.cancelarMov()" tooltip-placement="top" tooltip="Cancelar uma venda aberta. Tecla de Atalho - [Alt + C]" accesskey="C"ng-show="vm.movest.status==1">Cancelar Venda</button>
+					<div id="fechamento" ng-show="vm.movest.status==2">
+						<h4 class="text-info">Venda Fechada</h4>
+						<hr>
+						<h5>Total: <span class="label label-success pull-rigth">{{vm.movest.total | currency:'R$'}}</span></h5>
+						<h5>Meio de Pagamento: <span class="label label-default pull-rigth">{{vm.movest.pagamento}}</span></h5>
+
+						<h5>Valor Pago: <span class="label label-default pull-rigth">{{vm.movest.recebido | currency:'R$'}}</span></h5>
+						<h5>Troco: <span class="label label-danger pull-rigth">{{vm.movest.troco | currency:'R$'}}</span></h5>
+
+					</div>
+				</div>
+			</div>
+			<div id="col2" class="col-md-7">
+
+				<div id="itensMov">
+					<div class="panel panel-default">
+						<div id="pnl-itens" class="panel-body">
+							<div ng-switch on="vm.movest.status">
+								<div ng-switch-when="2">
+									<div class="form-group">
+										<h3 class="text-success" align="center">Caixa Livre</h3>
+									</div>
+								</div>						
+								<div ng-switch-when="1">
+									<div id="identCli" class="form-group">
+	<!-- 									<button class="btn btn-primary" type="button" ng-click="vm.idetificarCliente()" tooltip-placement="top" tooltip="Cancelar uma venda aberta. Tecla de Atalho - [L]" accesskey="L"ng-show="vm.movest.status==1">Cliente</button> -->
+										<span> {{vm.movest.pessoa}}</span>
+									</div>
+								</div>				
+								<div ng-switch-default>
+									<div class="form-group">
+										<h3 class="text-success"  align="center">Caixa Livre</h3>
+									</div>									
+								</div>		
+							</div>
+				            <table class="table table-condensed table-striped" >
+				                <thead>
+				                    <tr>
+				                    	<th>Nº</th>
+				                        <th>Item</th>
+				                        <th>Qtde.</th>
+				                        <th>Preço</th>
+				                        <th>Total</th>
+				                    </tr>
+				                </thead>
+				                <tbody ng-show="vm.movest.status == 1 || vm.visualisando == true">
+				                    <tr ng-repeat="i in vm.itemMov track by $index">
+				                        <td>{{$index+1}}</td>
+				                        <td>{{i.descricao}}</td>
+				                        <td>{{i.qt | currency :''}}</td>
+				                        <td>{{i.valor | currency:'R$'}}</td>
+				                        <td>{{i.total | currency:'R$'}}</td>
+				                        <td ng-show="vm.movest.status == 1"><button type="button" class="btn btn-danger btn-sm" data-ng-click="vm.remItemLista($index)"><i class="fa fa-trash-o"></i></button></td>
+				                    </tr>
+				                </tbody>
+				            </table>			            
+			            </div>
+							<div id="footerItens">
+								<span class="text-info" ng-show="vm.movest.status == 1">{{vm.itemMov.length}} Itens na Venda.</span>
+							</div>				            
+		            </div> 				
+
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="vm.cancel()">Sair</button>
+</div>

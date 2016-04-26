@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{vm.title}}</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="descricao" class="col-sm-2 control-label">Descrição</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control"  ng-model="vm.item.descricao" id="descricao" tooltip-placement="top" tooltip="Descrição do Item que vai ser exibido na venda." required>
+            </div>
+        </div>  
+        <div class="form-group">
+            <label for="codigo" class="col-sm-2 control-label">Código</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control"  ng-model="vm.item.codigo" id="codigo" tooltip-placement="top" tooltip="Código de identificação do item" required>
+            </div>
+        </div>         
+
+        <div class="form-group">
+            <label for="valor" class="col-sm-2 control-label">Preço</label>           
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">R$</span>             
+                    <input type="number" class="form-control" name="valor" ng-model="vm.item.valor" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" describedby="basic-addon1" tooltip-placement="top" tooltip="Valor a ser comercializado." required />
+                </div>
+            </div> 
+        </div>  
+
+        <div class="form-group">
+            <label for="status" class="col-sm-2 control-label">É Sorvete?</label>
+            <div class="col-sm-2">
+                <div class="col-sm-2">  
+                    <input type="checkbox"  data-ng-model="vm.item.tipo" ng-true-value="1" ng-false-value="0" tooltip-placement="top" tooltip="Informa se o item é composto de sorvete."> 
+                </div>
+            </div>
+
+            <label for="status" class="col-sm-2 control-label">Show Estoque?</label>
+            <div class="col-sm-2">
+                <div class="col-sm-2">  
+                    <input type="checkbox"  data-ng-model="vm.item.show_est" ng-true-value="1" ng-false-value="0" tooltip-placement="top" tooltip="Exibir esse item no controle de estoque."> 
+                </div>
+            </div> 
+
+            <label for="status" class="col-sm-2 control-label">Ativo</label>
+            <div class="col-sm-2">
+                <div class="col-sm-2">  
+                    <input type="checkbox"  data-ng-model="vm.item.status" ng-true-value="1" ng-false-value="0" tooltip-placement="top" tooltip="Quando marcado o item passa a esta disponivel para venda."> 
+                </div>
+            </div>
+
+        </div>        
+
+        <div class="form-group" ng-show="vm.item.tipo">
+            <label for="valor" class="col-sm-2 control-label">Fator Multiplicador</label>           
+            <div class="col-sm-5">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">X</span>             
+                    <input type="number" ng-value="1" class="form-control" name="valor" ng-model="vm.item.qt_bolas" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" describedby="basic-addon1" tooltip-placement="top" tooltip="Informa a quantidade que sai do estoque ao vender 1." required />
+                </div>
+            </div> 
+        </div>                      
+
+        <div class="form-group">
+
+        </div> 
+
+        <div class="form-group">
+            <label for="detalhes" class="col-sm-2 control-label">Detalhes</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" ng-model="vm.item.detalhes" id="detalhes" rows="5" tooltip-placement="top" tooltip="Descrição detalhada do item."></textarea> 
+            </div>
+        </div>  
+
+        <div class="form-group">
+            <div class="col-sm-2" style="inline-box-align: inline">
+                <button class="btn btn-primary btn-xs" type="button" ng-click="vm.selectImagem()">Imagem <i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-sm-6">
+                <img src="{{vm.urlImagem+vm.item.imagem}}" class="img-responsive img-rounded">
+            </div>      
+        </div>
+
+
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="vm.ok(vm.item)">Salvar</button>
+    <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancelar</button>
+</div>

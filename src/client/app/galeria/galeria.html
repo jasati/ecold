@@ -1,0 +1,40 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div ht-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                        <div class="">
+                            <tabset>
+                                <tab>
+                                    <tab-heading data-ng-click="vm.getGaleria()">
+                                        <i class="fa fa-file-image-o"></i> Imagens da Galeria
+                                    </tab-heading>
+
+                                    <div data-ng-include="'app/galeria/galeria-imgs.html'" scope="vm.galeria" ></div>
+
+                                </tab>
+                                <tab>
+                                    <tab-heading data-ng-click="">
+                                        <i class="fa fa-cloud-upload"></i> Incluir Novas Imagens
+                                    </tab-heading>
+
+                                    <div data-ng-include="'app/galeria/galeria-upload.html'" scope="uploader" ></div>
+                                </tab>
+
+                            </tabset>                            
+
+                        </div> 
+
+                   
+                    </div>
+                    <div class="widget-foot">
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

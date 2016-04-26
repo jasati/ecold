@@ -1,0 +1,120 @@
+<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blightblue">
+                        <h2 class="bold" style="margin: 3px"><i class="fa fa-home"></i> {{vm.empresa.fantasia}}</h2>
+                        <div class="navbar navbar-inverse">
+                            <div class="container-fluid">
+                                <div class="navbar-header navbar-inverse">
+                                  <button type="button" class="btn btn-primary navbar-btn" data-ng-click="vm.vender()" style="">Vender</button>
+                                  <button type="button" class="btn btn-primary navbar-btn" data-ng-click="vm.comprar()" style="">Comprar</button>
+                                  <button type="button" class="btn btn-primary navbar-btn" data-ng-click="vm.movimentarCaixa()" style="">Movimentar Caixa</button>                          
+                                </div>
+                            </div>
+                        </div>                
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div ht-widget-header title="Movimentações"
+                             allow-collapse="true" ></div>
+                        <div class="widget-content text-center text-info">
+                            <div ng-hide="vm.chartData"><h3 class="text-warning">Sem dados para exibir</h3></div>
+                            <canvas id="line" class="chart chart-line" chart-data="vm.chartData"
+                              chart-labels="vm.chartlabel" chart-legend="true" chart-series="vm.chartSeries" chart-click="onClick" >
+                            </canvas>                            
+                        </div>
+                        <div class="widget-foot">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chart.dataIni" tooltip-placement="top" tooltip="Data inicial do Movimento."/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chart.dataFim" tooltip-placement="top" tooltip="Data final do Movimento."/>          
+                                    </div>                              
+                                    <div class="col-md-3">
+                                        <select ng-options="periodo as periodo for periodo in vm.periodoChart" ng-model="vm.chart.periodo" class="form-control input-sm" tooltip-placement="top" tooltip="Periodo do Grafico" ng-change="vm.dadosChartMov()"></select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-default btn-sm" ng-click="vm.dadosChartMov()"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div ht-widget-header title="Caixa"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div ng-hide="vm.chartDataCx"><h3 class="text-warning">Sem dados para exibir</h3></div>
+                            <canvas id="pie" class="chart chart-pie" chart-legend="true" 
+                              chart-data="vm.chartDataCx" chart-labels="vm.chartLabelCx" chart-colours="vm.opitionChartColor">
+                            </canvas> 
+                        </div>
+                        <div class="widget-foot">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chartCx.dataIni" tooltip-placement="top" tooltip="Data inicial do caixa."/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chartCx.dataFim" tooltip-placement="top" tooltip="Data final do caixa."/>          
+                                    </div>                              
+                                    <div class="col-md-1">
+                                        <button class="btn btn-default btn-sm" ng-click="vm.dadosChartCaixa()"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="widget wblue">
+                        <div ht-widget-header title="Itens Vendidos"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <div ng-hide="vm.chartDataIm"><h3 class="text-warning">Sem dados para exibir</h3></div>
+                            <canvas id="bar" class="chart chart-bar" chart-data="vm.chartDataIm" chart-labels="vm.chartLabelIm" chart-series="vm.chartSerieIm">
+                            </canvas> 
+                        </div>
+                        <div class="widget-foot">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chartIm.dataIni" tooltip-placement="top" tooltip="Data inicial do caixa."/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.chartIm.dataFim" tooltip-placement="top" tooltip="Data final do caixa."/>          
+                                    </div>                              
+                                    <div class="col-md-1">
+                                        <button class="btn btn-default btn-sm" ng-click="vm.dadosChartIm()"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>            
+            </div>            
+        </div>
+    </section>
+</section>

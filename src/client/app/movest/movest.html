@@ -1,0 +1,44 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div ht-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                        <div class="">
+                            <tabset>
+                                <tab>
+                                    <tab-heading data-ng-click="vm.setTipoMov(1)">
+                                        <i class="fa fa-shopping-bag"></i> Compras
+                                    </tab-heading>
+
+                                    <div data-ng-include="'app/movest/movimentacao.html'" scope="vm.movest" ></div>
+
+                                </tab>
+                                <tab>
+                                    <tab-heading data-ng-click="vm.setTipoMov(0)">
+                                        <i class="fa fa-money"></i> Vendas
+                                    </tab-heading>
+
+                                    <div data-ng-include="'app/movest/movimentacao.html'" scope="vm.movest" ></div>
+                                </tab>
+                                <tab>
+                                    <tab-heading data-ng-click="vm.getEstoque()">
+                                        <i class="fa fa-cubes"></i> Estoque
+                                    </tab-heading>
+
+                                    <div data-ng-include="'app/estoque/estoque.html'" scope="vm.estoque"></div>
+                                </tab>                                
+
+                            </tabset>                            
+                        </div>                    
+                    </div>
+                    <div class="widget-foot">
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

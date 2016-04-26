@@ -1,0 +1,93 @@
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div ht-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content user">
+                        <div class="navbar navbar-inverse">
+                            <div class="container-fluid">
+                                <div class="navbar-header navbar-inverse">
+                                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                  </button>
+                                  <button type="button" class="btn btn-primary navbar-btn" data-ng-click="vm.newMovCaixa()" style="margin-top: 15px">Novo Movimento no Caixa</button>
+                                </div>                            
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <form class="navbar-form navbar-right" role="search">
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-sm" placeholder="Consultar Descrição" ng-model="vm.consulta.descricao">
+                                        </div>
+                                        <div class="form-group">
+                                            <select ng-options="consulta.desc for consulta in vm.optionConsulta track by consulta.valor" ng-model="vm.consulta.tipo" class="form-control input-sm" placeholder="Tipo"></select>
+                                        </div> 
+                                        <div class="form-group">
+                                            <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.consulta.dtini" tooltip-placement="top" tooltip="Data inicial da consulta"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="date" class="form-control input-sm" uib-datepicker-popup ng-model="vm.consulta.dtfim" tooltip-placement="top" tooltip="Data final da consulta."/>                                        
+                                        </div>                                                                           
+                                        <button type="button" class="btn btn-default navbar-btn" data-ng-click="vm.getMovCaixa()"><i class="fa fa-search"></i></button>  
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                        <h3 class="text-info">Total Caixa: <strong ng-class="{'text-success':vm.totalCaixa>0,'text-danger':vm.totalCaixa<0}">{{vm.totalCaixa | currency:'R$'}}</strong></h3>
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>Tipo Moeda</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="c in vm.movcaixa track by c.id_mc" ng-class="{'text-success':c.tipo==0,'text-danger':c.tipo==1}">
+                                    <td>{{c.tipo==0?'Entrada':'Saida'}}</td>
+                                    <td>{{c.descricao}}</td>
+                                    <td>{{c.valor | currency:'R$'}}</td>
+                                    <td>{{c.tipo_moeda}}</td>
+                                    <td>{{vm.convDate(c.data) | date : "dd/MM/yyyy 'as' HH:mm"}}</td>
+                                    <td><button type="button" class="btn btn-primary" data-ng-click="vm.editItem(i)">Alterar</button></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                    <tr><td></td></tr>
+                                    
+                                    
+                            </tfoot>
+                        </table>                      
+                    </div>
+                    <div class="widget-foot" align="center">
+                        <div>
+                            <pagination total-items="vm.totalReg" ng-model="vm.nPagina" max-size="5" class="pagination-sm" boundary-links="true" rotate="false" items-per-page="vm.totalRegPag" num-pages="numPages" ng-change="vm.setPage()"></pagination>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5 col-sm-offset-3">
+                                <div class="input-group input-group-sm">
+                                  <span class="input-group-addon" id="basic-addon1" >Registros por Pagina</span>
+                                  <input type="text" class="form-control" ng-model="vm.totalRegPag">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" ng-click="vm.getMovCaixa()">Ok!</button>
+                                  </span>                              
+                                </div> 
+                            </div>
+
+                        </div>                           
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

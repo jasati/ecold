@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <div ng-switch on="vm.movest.status">
+    	<div ng-switch-when="1">
+    		<h3 class="modal-title">Compra em Andamento - {{vm.dataAtual | date:"dd/MM/yyyy"}}</h3>  
+    	</div>
+    	<div ng-switch-when="2">
+    		<h3 class="modal-title">Compra Finalizada - {{vm.dataAtual | date:"dd/MM/yyyy"}}</h3>  
+    	</div>
+    	<div ng-switch-default>
+    		<h3 class="modal-title">Compra</h3>  			
+    	</div>
+    </div> 
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-12">
+
+			<div id="entrada" class="col-md-12">
+		        <div ng-show="vm.movest.status == 1" class="form-group">
+		            <div class="col-sm-7">
+		                <input type="text" class="form-control"  ng-model="vm.movest.descricao" id="descricao" placeholder="Informe a Descrição da Compra" autofocus required>
+		            </div>
+		        </div>
+		        <div ng-show="vm.movest.status != 1">
+					<button class="btn btn-primary" type="button" ng-click="vm.novaCompra()" tooltip-placement="top" tooltip="Iniciar uma nova entrada no estoque - [Alt + I] " accesskey="I">Iniciar</button>		        	
+		        </div>
+			</div>
+
+			<div id="sel-item-entrada" class="col-md-12">
+				<hr>
+				<div id="localizaItem" class="form-group col-md-6">
+					 <input id="inp-item" type="text" class="form-control" tooltip-placement="top" tooltip="Pressione [ENTER] no teclado, para exibir os itens ou digite a descrição do item e precione [ENTER] para confirmar" placeholder="Informe o item e precione [ENTER]" ng-model="vm.itemSearch" autofocus ng-keypress="vm.itemCompra($event)"/>
+				</div>				
+			</div>
+			<div id="itens-entrada" class="col-md-12">
+	            <table class="table table-condensed table-striped" >
+	                <thead>
+	                    <tr>
+	                    	<th>Nº</th>
+	                        <th>Item</th>
+	                        <th>Qtde.</th>
+	                        <th>Valor</th>
+	                        <th>Total</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr ng-repeat="i in vm.itemMov track by $index">
+	                        <td>{{$index+1}}</td>
+	                        <td>{{i.descricao}}</td>
+	                        <td>{{i.qt | currency :''}}</td>
+	                        <td>{{i.valor | currency:'R$'}}</td>
+	                        <td>{{i.total | currency:'R$'}}</td>
+	                        <td ng-show="vm.movest.status == 1"><button type="button" class="btn btn-danger btn-sm" data-ng-click="vm.remItemLista($index)"><i class="fa fa-trash-o"></i></button></td>
+	                    </tr>
+	                </tbody>
+	            </table>				
+			</div>
+			<div id="totalizacao" class="col-md-12">
+				<div class="col-md-7">
+					<h3 ng-show="vm.movest.status==1 && vm.visualisando == true">Total: <span class="text-danger">{{vm.movest.total | currency:'R$'}}</span></h3>
+
+				</div>
+				<div class="col-md-5">
+					<button ng-show="vm.movest.status==1" style="margin: 5px" class="btn btn-success pull-right" type="button" ng-click="vm.finalizarCompra()" tooltip-placement="top" tooltip="Finalizar movimentação de compra- [Alt + F] " accesskey="F">Finalizar</button>
+					<button ng-show="vm.movest.status==1" style="margin: 5px" class="btn btn-warning pull-right" type="button" ng-click="vm.cancelarMov()" tooltip-placement="top" tooltip="Finalizar movimentação de compra- [Alt + F] " accesskey="F">Cancelar</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="vm.cancel()">Sair</button>    
+
+</div>

@@ -1,0 +1,23 @@
+<div class="page-splash">
+    <div class="page-splash-message" style="margin-bottom: 10px;">
+        {{vm.appTitulo}}
+        <p><small>{{vm.appSubTitulo}}</small></p>
+    </div>
+    <div class="box-login">
+        <div class="col-sm-6 col-sm-offset-3">          
+            <form>
+                <div class="form-group">
+                    <input type="text" id="username" name="login" class="form-control input-lg" placeholder="Usuário" data-ng-model="vm.usuario.login" required>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" id="password" name="senha" class="form-control input-lg" placeholder="Senha" data-ng-model="vm.usuario.senha" required>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block btn-lg" type="button" ng-click="vm.logar()">Acessar</button>
+                </div>
+           </form>
+        </div>
+    </div>    
+</div>
